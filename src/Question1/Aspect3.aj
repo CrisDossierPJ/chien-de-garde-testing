@@ -5,7 +5,7 @@ public aspect Aspect3 {
 
 	// POP
 	pointcut pop():
-		call(* StackInterface.pop());
+		call(* StackInterface.pop())&& within(Main3);
 
 	after() returning(Object object): pop(){
 		Object obj = fiableStack.pop();

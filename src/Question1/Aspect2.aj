@@ -5,7 +5,7 @@ public aspect Aspect2 {
 	int listSizeBefPop = 0;
 
 	pointcut pop_minus(StackInterface stack) :
-			call(* StackInterface.pop()) && target(stack);
+			call(* StackInterface.pop()) && target(stack) && within(Main2);
 
 	before(StackInterface stack): pop_minus(stack) {
 		listSizeBefPop = stack.size();

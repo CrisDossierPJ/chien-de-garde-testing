@@ -1,0 +1,30 @@
+Question 3 : 
+Variables : 
+at_w
+w_light
+on_bridge
+at_e
+e_light
+
+1- Les deux feux ne sont jamais verts en même temps : 
+
+!G(w_light & e_light)
+
+2-Chaque feu ne reste vert que pour 3 états successifs
+
+G(  w_light & X(w_light & (X w_light)) -> X(w_light))
+3-Un feu ne devient vert que si une voiture attend
+G(at_w -> X w_light)
+
+4- Un feu ne peut passer au vert si des voitures sont sur le pont
+G( (!w_light & (X w_light)) -> (at_w && !on_bridge))
+
+
+G( w_light)
+5- Si un feu est vert, une voiture à l'intersection correspondante se 
+retrouve sur le pont dans l'état suivant
+G ( (w_light & at_w) -> X (on_bridge) )
+
+CTL : 
+1-Il existe une exécution où il n'y a jamais de voiture
+2-Une voiture n'attend pas indéfiniment au feu rouge
