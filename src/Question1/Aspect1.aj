@@ -7,7 +7,7 @@ public aspect Aspect1 {
 	
 	before(StackInterface stack): top_pop_empty(stack){
 		if(stack.isEmpty()) {
-			System.out.println("Erreur de la propriété 1");
+			System.err.println("Erreur de la propriété 1");
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package Question1;
 
-public class BrokenStack implements StackInterface{
+public class BrokenStackQuest2 implements StackInterface{
 	private int size = 8;
 
 	@Override
