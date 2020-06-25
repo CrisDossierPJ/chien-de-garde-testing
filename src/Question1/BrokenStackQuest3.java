@@ -31,10 +31,11 @@ public class BrokenStackQuest3 implements StackInterface {
 	}
 
 	@Override
+	//First In Last Out
 	public Object pop() {
 		if (top > 0) {
 			top--;
-			return stack[1];
+			return stack[0];
 		} else {
 			return null;
 		}

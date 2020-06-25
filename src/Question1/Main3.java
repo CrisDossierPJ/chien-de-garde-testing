@@ -8,7 +8,7 @@ public class Main3 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		BrokenStackQuest3 stack = new BrokenStackQuest3();
-		int sizeTest = 9;
+		int sizeTest = 15;
 
 		for (int i = 0; i < sizeTest; i++) {
 			stack.push(i);
