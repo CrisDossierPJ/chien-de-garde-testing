@@ -7,7 +7,7 @@ w_light : boolean;
 on_bridge boolean;
 at_e: boolean;
 e_light : boolean;
-time : 1 .. 3;
+time : 1..3;
 
 ASSIGN
   init(at_w) := FALSE;
@@ -17,13 +17,36 @@ ASSIGN
   init(e_light) := FALSE;    
   init(t) := 1;
 
+ next(time) := case
+    ((w_light) | (e_light) & (t < 3)) : time + 1;
+     ((w_light) | (e_light) & (t = 3)) : 1;
+    esac;
+ 
 
+ next(on_bridge) := case
+    ((w_light) | (e_light)) & (time > 1)  : TRUE;
+    TRUE : FALSE;
+    esac;
+    
+ next(w_light) := case
+    !(e_light) & (on_bridge | at_w) : TRUE;
+    TRUE : FALSE;
+    esac;
+    
+ next(e_light) := case
+    !(w_light) & (on_bridge | at_e) : TRUE;
+    TRUE : FALSE;
+    esac;
 
+  next(at_w) := case
+    at_w & !(w_light) : TRUE;
+    TRUE : {TRUE, FALSE};
+    esac;
 
-
-
-
-
+  next(at_e) := case
+    at_e & !(e_light) : TRUE;
+    TRUE : {TRUE, FALSE};
+    esac;
 
 
 
