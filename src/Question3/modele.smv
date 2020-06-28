@@ -75,7 +75,10 @@ retrouve sur le pont dans l'état suivant --/
 LTLSPEC( G( (w_light & at_w) -> X (on_bridge))) & (G( (e_light & at_e) -> X (on_bridge)) );
 
 /-- CTL : --/
-/-- 1-Il existe une exécution où il n'y a jamais de voiture -//
+/-- 1-Il existe une exécution où il n'y a jamais de voiture  :  Il peut y avoir une execution sans voiture, 
+      l'apparition d'une voiture à un feu se faisant de manière aléatoire--/
  CTLSPEC( AG ( at_e -> AF (e_light))) & (AG ( at_w -> AF (w_light)) );
-/-- 2-Une voiture n'attend pas indéfiniment au feu rouge --/
+ 
+/-- 2-Une voiture n'attend pas indéfiniment au feu rouge :  La vérification d'un feu se faisant toujours avant l'autre, 
+      il se peut qu'un feu reste toujours rouge --/
    CTLSPEC EG ((!at_w & !at_e) & !on_bridge);
