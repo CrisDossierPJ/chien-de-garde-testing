@@ -1,0 +1,51 @@
+
+MODULE main
+
+VAR 
+at_w : boolean;
+w_light : boolean;
+on_bridge boolean;
+at_e: boolean;
+e_light : boolean;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/--1- Les deux feux ne sont jamais verts en même temps : --/
+
+LTLSPEC  !G(w_light & e_light);
+
+/-- 2-Chaque feu ne reste vert que pour 3 états successifs --/
+
+LTLSPEC( G(  w_light & X(w_light & (X w_light)) -> X(w_light))) & (G(  e_light & X(e_light & (X e_light)) -> X(e_light)) );
+
+/-- 3-Un feu ne devient vert que si une voiture attend --/
+
+LTLSPEC( G(at_w -> X w_light)) & (G(at_e -> X e_light) );
+
+/-- 4- Un feu ne peut passer au vert si des voitures sont sur le pont --/
+
+LTLSPEC( G( (!w_light & (X w_light)) -> (at_w && !on_bridge))) & (G( (!e_light & (X e_light)) -> (at_e & !on_bridge)) );
+
+/-- 5- Si un feu est vert, une voiture à l'intersection correspondante se 
+retrouve sur le pont dans l'état suivant --/
+
+LTLSPEC( G( (w_light & at_w) -> X (on_bridge))) & (G( (e_light & at_e) -> X (on_bridge)) );
+
+/-- CTL : --/
+/-- 1-Il existe une exécution où il n'y a jamais de voiture -//
+ CTLSPEC( AG ( at_e -> AF (e_light))) & (AG ( at_w -> AF (w_light)) );
+/-- 2-Une voiture n'attend pas indéfiniment au feu rouge --/
+   CTLSPEC EG ((!at_w & !at_e) & !on_bridge);

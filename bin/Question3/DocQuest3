@@ -17,7 +17,7 @@ G(  w_light & X(w_light & (X w_light)) -> X(w_light))
 G(at_w -> X w_light)
 
 4- Un feu ne peut passer au vert si des voitures sont sur le pont
-G( (!w_light & (X w_light)) -> (at_w && !on_bridge))
+G( (!w_light & (X w_light)) -> (at_w & !on_bridge))
 
 
 G( w_light)
@@ -28,3 +28,4 @@ G ( (w_light & at_w) -> X (on_bridge) )
 CTL : 
 1-Il existe une exécution où il n'y a jamais de voiture
 2-Une voiture n'attend pas indéfiniment au feu rouge
+    EG ( (!at_w & !at_e) & !on_bridge );
