@@ -7,6 +7,15 @@ w_light : boolean;
 on_bridge boolean;
 at_e: boolean;
 e_light : boolean;
+time : 1 .. 3;
+
+ASSIGN
+  init(at_w) := FALSE;
+  init(w_light) := FALSE;
+  init(on_bridge) := FALSE;
+  init(at_e) := FALSE;
+  init(e_light) := FALSE;    
+  init(t) := 1;
 
 
 
@@ -20,9 +29,7 @@ e_light : boolean;
 
 
 
-
-
-
+/--
 /--1- Les deux feux ne sont jamais verts en même temps : --/
 
 LTLSPEC  !G(w_light & e_light);
